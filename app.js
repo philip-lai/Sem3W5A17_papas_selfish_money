@@ -5,6 +5,19 @@ const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/moneybook', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 const db = mongoose.connection
 
+// 引用 express-handlebars
+const exphbs = require('express-handlebars');
+
+// 告訴 express 使用 handlebars 當作 template engine 並預設 layout 是 main
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.set('view engine', 'handlebars')
+
+// 引用 body-parser
+const bodyParser = require('body-parser');
+// 設定 bodyParser
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
 db.on('error', () => {
   console.log('mongodb error!')
 })
@@ -16,10 +29,10 @@ db.once('open', () => {
 const Record = require('./models/record')
 const User = require('./models/user')
 
-// 設定第一個首頁路由
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
+app.use('/', require('./routes/home'))
+app.use('/record', require('./routes/record'))
+app.use('/users', require('./routes/user'))
+// app.use('/auth', require('./routes/auths'))
 
 // 設定 express port 3000
 app.listen(3000, () => {
