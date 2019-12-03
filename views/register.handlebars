@@ -1,0 +1,54 @@
+{{!-- views/login.handlebars --}}
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>Register</h1>
+      {{!-- 引用messages這個partial view --}}
+      <form action="/users/login" method="POST">
+        <div class="row">
+          <div class="col-sm-4" style="font-size: 20px; vertical-align: middle;">
+            <label for="name">Name</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="name" id="name" name="name" class="form-control" placeholder="Enter your name" />
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-sm-4" style="font-size: 20px; vertical-align: middle;">
+            <label for="email">Email</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" />
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-sm-4" style="font-size: 20px; vertical-align: middle;">
+            <label for="password">Password</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" />
+          </div>
+        </div>
+
+        <div class="row mt-2 mb-3">
+          <div class="col-sm-4" style="font-size: 20px; vertical-align: middle;">
+            <label for="password2">Password confirm</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="password2" id="password2" name="password2" class="form-control"
+              placeholder="Enter Password again" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+        <!-- 新增 Facebook Login Button -->
+        <a href="/auth/facebook" class="btn btn-info btn-block">Facebook Login</a>
+      </form>
+      <p class="lead mt-4">
+        No Account? <a href="/users/register">Register</a>
+      </p>
+    </div>
+  </div>
+</div>

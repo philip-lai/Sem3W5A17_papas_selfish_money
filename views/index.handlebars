@@ -1,1 +1,43 @@
-<h2>this is index</h2>
+<!-- ./views/index.handlebars -->
+
+{{!-- <a href="/todos/new">Creat</a> --}}
+<ul class="list-group">
+  <h4>{{{totalAmount}}}</h4>
+  {{#each repots}}
+  <li class="list-group-item">
+    <div class="row">
+      <div class="restaurant-category mb-1 mr-1">
+        {{#if (eq this.category "家居物業")}}
+        <i class="fas fa-home pr-2"></i>
+        {{/if}}
+        {{#if (eq this.category "交通出行")}}
+        <i class="fas fa-shuttle-van"></i>
+        {{/if}}
+        {{#if (eq this.category "休閒娛樂")}}
+        <i class="fas fa-grin-beam"></i>
+        {{/if}}
+        {{#if (eq this.category "餐飲食品")}}
+        <i class="fas fa-utensils"></i>
+        {{/if}}
+        {{#if (eq this.category "其他")}}
+        <i class="fas fa-pen"></i>
+        {{/if}}
+      </div>
+      <div class="col-auto mr-auto">
+        <h4 style="display: inline; vertical-align: middle;">
+          {{{this.category}}}
+        </h4>
+      </div>
+
+      <div class="col-auto">
+        <a href="/reports/{{{this.id}}}" class="btn btn-success">edit</a>
+        <form action="/todos/{{{this.id}}}/delete?_method=DELETE" method="POST" style="display:inline;">
+          <button type="submit" class="btn btn-danger">delete</button>
+        </form>
+      </div>
+    </div>
+  </li>
+  {{/each}}
+  <a href="/reports/new" class="btn btn-primary mt-3 mr-auto ml-auto">新增支出</a>
+
+</ul>

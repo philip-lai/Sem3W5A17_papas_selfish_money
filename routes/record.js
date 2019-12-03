@@ -14,10 +14,15 @@ router.get('/new', (req, res) => {
 })
 
 // 新增一筆記帳
-router.post('/', (req, res) => {
+router.post('/new', (req, res) => {
+  console.log(req.body)
   const record = Record({
-    name: req.body.name,
-    userId: req.user._id
+    name: req.body.billname,
+    category: req.body.billcategory,
+    date: req.body.billdate,
+    amount: req.body.billamount
+
+    // userId: req.user._id
   })
   record.save(err => {
     if (err) return console.error(err)
