@@ -19,6 +19,12 @@ const passport = require('passport')
 // 告訴 express 使用 handlebars 當作 template engine 並預設 layout 是 main
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+
+app.use(session({
+  secret: 'your secret key',   // secret: 定義一組屬於你的字串做為私鑰
+  resave: false,
+  saveUninitialized: true,
+}))
 // 使用 Passport 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -38,11 +44,7 @@ app.use(methodOverride('_method'))
 // setting static files
 app.use(express.static('public'))
 
-app.use(session({
-  secret: 'your secret key',   // secret: 定義一組屬於你的字串做為私鑰
-  resave: false,
-  saveUninitialized: true,
-}))
+
 
 
 db.on('error', () => {

@@ -6,15 +6,15 @@ const router = express.Router()
 const Record = require('../models/record')
 
 // 載入 auth middleware裡的authenticated方法
-// const { authenticated } = require('../config/auth')
+const { authenticated } = require('../config/auth')
 
 // 新增一筆記帳頁面
-router.get('/new', (req, res) => {
+router.get('/new', authenticated, (req, res) => {
   return res.render('new')
 })
 
 // 新增一筆記帳
-router.post('/new', (req, res) => {
+router.post('/new', authenticated, (req, res) => {
   let icon
   console.log(req.body)
   if (req.body.billcategory === "traffic") {
@@ -42,14 +42,14 @@ router.post('/new', (req, res) => {
   })
 })
 
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', authenticated, (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     return res.render('edit', { record: record })
   })
 })
 
-router.put('/:id/edit', (req, res) => {
+router.put('/:id/edit', authenticated, (req, res) => {
   let icon
   if (req.body.billcategory === "traffic") {
     icon = "-shuttle-van"
@@ -78,7 +78,7 @@ router.put('/:id/edit', (req, res) => {
   })
 })
 
-router.delete('/:id/delete', (req, res) => {
+router.delete('/:id/delete', authenticated, (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     record.remove(err => {
