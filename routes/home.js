@@ -9,7 +9,10 @@ const Record = require('../models/record')
 // 設定首頁路由器
 //加入authenticated驗證
 router.get('/', (req, res) => {
-  return res.render('index')
+  Record.find((err, records) => {
+    if (err) return console.error(err)
+    return res.render('index', { records: records })
+  })
 })
 
 module.exports = router

@@ -15,13 +15,25 @@ router.get('/new', (req, res) => {
 
 // 新增一筆記帳
 router.post('/new', (req, res) => {
+  let icon
   console.log(req.body)
+  if (req.body.billcategory === "traffic") {
+    icon = "-shuttle-van"
+  } else if (req.body.billcategory === "house") {
+    icon = "-home"
+  } else if (req.body.billcategory === "entertainment") {
+    icon = "-grin-beam"
+  } else if (req.body.billcategory === "food") {
+    icon = "-utensils"
+  } else if (req.body.billcategory === "others") {
+    icon = "-pen"
+  }
   const record = Record({
     name: req.body.billname,
     category: req.body.billcategory,
     date: req.body.billdate,
-    amount: req.body.billamount
-
+    amount: req.body.billamount,
+    icons: icon
     // userId: req.user._id
   })
   record.save(err => {
@@ -37,13 +49,28 @@ router.get('/:id/edit', (req, res) => {
   })
 })
 
-router.post('/:id/edit', (req, res) => {
+router.put('/:id/edit', (req, res) => {
+  let icon
+  if (req.body.billcategory === "traffic") {
+    icon = "-shuttle-van"
+  } else if (req.body.billcategory === "house") {
+    icon = "-home"
+  } else if (req.body.billcategory === "entertainment") {
+    icon = "-grin-beam"
+  } else if (req.body.billcategory === "food") {
+    icon = "-utensils"
+  } else if (req.body.billcategory === "others") {
+    icon = "-pen"
+  }
+
   Record.findById(req.params.id, (err, record) => {
     console.log(req.params.id)
     if (err) return console.error(err)
-    record.name = req.body.name
-    record.category = req.body.category
-    record.amount = req.body.amount
+    record.name = req.body.billname
+    record.category = req.body.billcategory
+    record.date = req.body.billdate
+    record.amount = req.body.billamount
+    record.icons = icon
     record.save(err => {
       if (err) return console.error(err)
       return res.redirect(`/`)
@@ -51,8 +78,8 @@ router.post('/:id/edit', (req, res) => {
   })
 })
 
-router.post('/:id/delete', (req, res) => {
-  Report.findById(req.params.id, (err, record) => {
+router.delete('/:id/delete', (req, res) => {
+  Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     record.remove(err => {
       if (err) return console.error(err)
