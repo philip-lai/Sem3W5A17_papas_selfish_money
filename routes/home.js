@@ -11,10 +11,29 @@ const { authenticated } = require('../config/auth')
 // 設定首頁路由器
 //加入authenticated驗證
 router.get('/', authenticated, (req, res) => {
-  Record.find((err, records) => {
-    if (err) return console.error(err)
-    return res.render('index', { records: records })
-  })
+  const choosenCategory = req.query.category
+  let totalAmount = 0
+  console.log(choosenCategory)
+  if (choosenCategory === "all" || choosenCategory === undefined) {
+    Record.find({ userId: req.user._id })            // 只會列出登入使用者的 todo
+      .exec((err, records) => {
+        if (err) return console.error(err)
+        for (let i in records) {
+          totalAmount += records[i].amount
+        }
+        return res.render('index', { records: records, totalAmount })
+      })
+  } else {
+    Record.find({ userId: req.user._id, category: choosenCategory })            // 只會列出登入使用者的 todo
+      .exec((err, records) => {
+        if (err) return console.error(err)
+        for (let i in records) {
+          totalAmount += records[i].amount
+        }
+        return res.render('index', { records: records })
+      })
+  }
+
 })
 
 module.exports = router

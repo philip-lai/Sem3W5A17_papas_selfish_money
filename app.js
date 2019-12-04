@@ -18,7 +18,9 @@ const methodOverride = require('method-override')
 
 const session = require('express-session')
 const passport = require('passport')
+const flash = require('connect-flash')
 
+app.use(flash())
 
 // 告訴 express 使用 handlebars 當作 template engine 並預設 layout 是 main
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -37,6 +39,8 @@ require('./config/passport')(passport)
 app.use((req, res, next) => {
   res.locals.user = req.user
   res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 
@@ -48,6 +52,7 @@ app.use(methodOverride('_method'))
 
 // setting static files
 app.use(express.static('public'))
+
 
 
 

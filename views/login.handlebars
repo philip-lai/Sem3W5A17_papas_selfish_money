@@ -4,6 +4,7 @@
     <div class="card card-body">
       <h1 class="text-center mb-3">Login</h1>
       {{!-- 引用messages這個partial view --}}
+      {{> messages }}
       <form action="/users/login" method="POST">
         <div class="row">
           <div class="col-sm-2" style="font-size: 20px; vertical-align: middle;">

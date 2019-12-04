@@ -33,7 +33,8 @@ router.post('/new', authenticated, (req, res) => {
     category: req.body.billcategory,
     date: req.body.billdate,
     amount: req.body.billamount,
-    icons: icon
+    icons: icon,
+    userId: req.user._id
     // userId: req.user._id
   })
   record.save(err => {

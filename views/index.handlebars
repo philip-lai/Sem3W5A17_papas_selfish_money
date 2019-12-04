@@ -1,44 +1,75 @@
 <!-- ./views/index.handlebars -->
 
 {{!-- <a href="/todos/new">Creat</a> --}}
-<ul class="list-group col-md-6 m-auto">
-  <div class="ml-auto mt-2 mr-auto">
-    <h4>總支出：{{{totalAmount}}}</h4>
-  </div>
+<div class="container col-md-6 mt-2 mb-2">
 
-  {{#each records}}
-  <li class="list-group-item">
-    <div class="row">
-      <div class="row col-md-9">
-        <div class="col-md-1">
-          <h5><i class="fas fa{{{this.icons}}}"></i></h5>
-        </div>
+  <div class="row search-bar">
 
-        <div class="col-md-9" style="display: inline">
-          <h5>
-            {{{this.name}}}
-          </h5>
-          <i>
-            {{{this.date}}}
-          </i>
-        </div>
 
-        <div class="col-md-2" style="vertical-align: middle;">
-          {{{this.amount}}}
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div>
-          <a href="/record/{{{this.id}}}/edit" class="btn btn-success">edit</a>
-          <form action="/record/{{{this.id}}}/delete?_method=DELETE" method="POST" style="display:inline;">
-            <button type="submit" class="btn btn-danger">delete</button>
-          </form>
+    <div id="select-category" class="mr-5">
+      <div class="dropdown">
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle ml-2 categoryDropdownBtn"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-item="{{filterCategory}}">
+          {{#if filterCategory}}
+          {{{categoryNameZh}}}
+          {{else}}
+          類別
+          {{/if}}
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/?category=all">全部類別</a>
+          <a class="dropdown-item" href="/?category=house">家居物業</a>
+          <a class="dropdown-item" href="/?category=traffic">交通出行</a>
+          <a class="dropdown-item" href="/?category=entertainment">休閒娛樂</a>
+          <a class="dropdown-item" href="/?category=food">餐飲食品</a>
+          <a class="dropdown-item" href="/?category=other">其他</a>
         </div>
       </div>
     </div>
-  </li>
-  {{/each}}
+
+    <div class="mt-1">
+      <h4>總支出：{{{totalAmount}}}</h4>
+    </div>
+
+  </div>
+</div>
+
+<ul class="list-group col-md-6 m-auto">
+
+
+  <table class="table table-active mx-auto mb-5">
+
+    <tbody class="col-sm-12 m-auto">
+      {{#each records}}
+      <tr>
+        <th scope="row" class="text-right pt-4">
+          <h1><i class="fas fa{{{this.icons}}}"></i></h1>
+        </th>
+        <td>
+          <div class="colum pt-1">
+            <h4>{{ this.name }}</h4>
+            <p class="date">{{this.date}}</p>
+          </div>
+        </td>
+        <td class="pt-4">
+          <h4>{{this.merchant}}</h4>
+        </td>
+        <td class="pt-4">
+          <h4>{{ this.amount }}</h4>
+        </td>
+        <td class="row pt-4">
+          <div>
+            <a href="/record/{{{this.id}}}/edit" class="btn btn-success">edit</a>
+            <form action="/record/{{{this.id}}}/delete?_method=DELETE" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-danger">delete</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{!-- {{/each}} --}}
   <a href="/record/new" class="btn btn-primary mt-3 mr-auto ml-auto">新增支出</a>
 
 </ul>

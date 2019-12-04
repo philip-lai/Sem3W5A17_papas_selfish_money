@@ -1,0 +1,76 @@
+{
+  "results": [
+    {
+      "name": "買iphone xs",
+      "date": "1/21/2019",
+      "category": "others",
+      "amount": 34900
+    },
+    {
+      "name": "買三好米",
+      "date": "2/25/2019",
+      "category": "house",
+      "amount": 150
+    },
+    {
+      "name": "花東行",
+      "date": "3/28/2019",
+      "category": "entertainment",
+      "amount": 12000
+    },
+    {
+      "name": "搭高鐵去台北",
+      "date": "4/16/2019",
+      "category": "traffic",
+      "amount": 1500
+    },
+    {
+      "name": "吃雞排",
+      "date": "5/16/2019",
+      "category": "food",
+      "amount": 65
+    },
+    {
+      "name": "喝星巴克",
+      "date": "6/17/2019",
+      "category": "food",
+      "amount": 150
+    },
+    {
+      "name": "修理馬桶",
+      "date": "7/17/2019",
+      "category": "house",
+      "amount": 2000
+    },
+    {
+      "name": "搭計程車去高鐵站",
+      "date": "8/17/2019",
+      "category": "traffic",
+      "amount": 230
+    },
+    {
+      "name": "唱卡拉ok",
+      "date": "9/17/2019",
+      "category": "entertainment",
+      "amount": 500
+    },
+    {
+      "name": "手機9月帳單",
+      "date": "10/17/2019",
+      "category": "others",
+      "amount": 599
+    },
+    {
+      "name": "看電影",
+      "date": "11/17/2019",
+      "category": "entertainment",
+      "amount": 300
+    },
+    {
+      "name": "搭火車去彰化",
+      "date": "12/17/2019",
+      "category": "traffic",
+      "amount": 297
+    }
+  ]
+}
